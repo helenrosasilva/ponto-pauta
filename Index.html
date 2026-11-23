@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Papelaria Ponto & Pauta: cadernos, escrita e materiais para tirar ideias do papel.">
+  <title>Ponto &amp; Pauta | Papelaria criativa</title>
+  <link rel="stylesheet" href="Index.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <a class="brand" href="#inicio" aria-label="Ponto & Pauta, início"><span class="brand-mark" aria-hidden="true">P.</span><span>Ponto <i>&</i> Pauta</span></a>
+      <nav class="site-tabs" role="tablist" aria-label="Seções">
+        <button class="tab-button" id="catalog-tab" type="button" role="tab" aria-selected="true" aria-controls="catalog-panel" tabindex="0">Loja</button>
+        <button class="tab-button" id="registrations-tab" type="button" role="tab" aria-selected="false" aria-controls="registrations-panel" tabindex="-1">Área da equipe</button>
+      </nav>
+    </div>
+  </header>
+
+  <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="illustration-notebook" viewBox="0 0 64 64">
+      <path d="M17 9h34v46H17a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5Z" />
+      <path d="M21 9v46m9-34h13m-13 9h13m-13 9h13" />
+    </symbol>
+    <symbol id="illustration-pen" viewBox="0 0 64 64">
+      <path d="m17 47 4-12L43 13a6 6 0 0 1 8 8L29 43l-12 4Z" />
+      <path d="m21 35 8 8m14-25 8 8M17 47l-2 5 5-2" />
+    </symbol>
+    <symbol id="illustration-case" viewBox="0 0 64 64">
+      <path d="M9 21a7 7 0 0 1 7-7h32a7 7 0 0 1 7 7v22a7 7 0 0 1-7 7H16a7 7 0 0 1-7-7V21Z" />
+      <path d="M9 27h46m-23-6v6" />
+    </symbol>
+    <symbol id="illustration-planner" viewBox="0 0 64 64">
+      <rect x="11" y="13" width="42" height="42" rx="4" />
+      <path d="M11 24h42M21 9v9m22-9v9M20 33h7m5 0h12m-24 9h7m5 0h12" />
+    </symbol>
+    <symbol id="illustration-markers" viewBox="0 0 64 64">
+      <path d="m15 46 8-29 9 2-8 29-8 5-3-7Zm17-28 9 2-8 29-9-2m17-28 9 2-8 29-9-2" />
+      <path d="m23 17 9 2m10 2 9 2" />
+    </symbol>
+    <symbol id="illustration-notepad" viewBox="0 0 64 64">
+      <path d="M15 11h37v44H15a5 5 0 0 1-5-5V16a5 5 0 0 1 5-5Z" />
+      <path d="M18 11v44m10-31h15m-15 9h15m-15 9h15" />
+    </symbol>
+    <symbol id="illustration-tape" viewBox="0 0 64 64">
+      <circle cx="32" cy="32" r="21" />
+      <circle cx="32" cy="32" r="9" />
+      <path d="M47 47 55 55" />
+    </symbol>
+    <symbol id="illustration-pencil" viewBox="0 0 64 64">
+      <path d="m17 44 25-27 9 8-25 27-12 4 3-12Z" />
+      <path d="m17 44 9 8m16-35 9 8" />
+    </symbol>
+    <symbol id="illustration-cards" viewBox="0 0 64 64">
+      <rect x="12" y="15" width="31" height="39" rx="3" transform="rotate(-8 12 15)" />
+      <rect x="24" y="12" width="29" height="40" rx="3" />
+      <path d="M31 25h15m-15 8h12m-12 8h9" />
+    </symbol>
+    <symbol id="illustration-artkit" viewBox="0 0 64 64">
+      <path d="M12 17h40v34H12zM12 25h40" />
+      <path d="m21 42 13-13 9 9-13 13h-9v-9Zm14-15 5-5 9 9-5 5" />
+    </symbol>
+  </svg>
+
+  <main class="container" id="inicio">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="intro-content">
+        <p class="eyebrow">Papel bom, ideia solta</p>
+        <h1 id="page-title">Ideias boas pedem papel.</h1>
+        <p>Uma papelaria para quem gosta de pensar com as mãos. Escolha seus companheiros de criação.</p>
+        <button class="intro-link" id="show-catalog" type="button">Ver a coleção <span aria-hidden="true">↘</span></button>
+      </div>
+      <div class="hero-still-life" aria-hidden="true"><span class="hero-sun"></span><span class="hero-note note-back"></span><span class="hero-note note-front"></span><svg viewBox="0 0 64 64"><use href="#illustration-pen"></use></svg><span class="hero-caption">feito para<br>suas ideias</span></div>
+    </section>
+    <p class="api-message" id="api-message" role="status" aria-live="polite" hidden></p>
+
+    <section class="tab-panel" id="catalog-panel" role="tabpanel" aria-labelledby="catalog-tab" tabindex="0">
+      <section class="section" id="catalogo" aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Escolhidos para criar</p>
+            <h2 id="catalog-title">Peças de papelaria</h2>
+          </div>
+          <span class="item-count" id="product-count" aria-live="polite"></span>
+        </div>
+        <div class="product-grid" id="product-list"></div>
+        <p class="empty-state" id="product-empty" hidden>Nenhum produto cadastrado.</p>
+      </section>
+    </section>
+
+    <section class="tab-panel" id="registrations-panel" role="tabpanel" aria-labelledby="registrations-tab" tabindex="0" hidden>
+      <section class="section forms-section" aria-label="Cadastros">
+        <div class="form-card" id="cadastro-produto">
+          <p class="eyebrow">Vitrine</p>
+          <h2>Adicionar produto</h2>
+          <form id="product-form">
+            <label for="product-name">Nome</label>
+            <input id="product-name" name="name" type="text" maxlength="80" required>
+
+            <label for="product-price">Preço</label>
+            <div class="price-input">
+              <span aria-hidden="true">R$</span>
+              <input id="product-price" name="price" type="number" min="0.01" max="9999999.99" step="0.01" placeholder="0,00" required>
+            </div>
+
+            <label for="product-description">Descrição</label>
+            <textarea id="product-description" name="description" rows="3" maxlength="240" required></textarea>
+
+            <button type="submit">Adicionar produto</button>
+            <p class="form-message" id="product-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="form-card" id="cadastro-funcionario">
+          <p class="eyebrow">Ponto & Pauta</p>
+          <h2>Cadastrar pessoa da equipe</h2>
+          <form id="employee-form">
+            <label for="employee-name">Nome</label>
+            <input id="employee-name" name="name" type="text" maxlength="100" required>
+
+            <label for="employee-cpf">CPF</label>
+            <input id="employee-cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" required>
+
+            <label for="employee-email">E-mail</label>
+            <input id="employee-email" name="email" type="email" maxlength="120" placeholder="nome@exemplo.com" required>
+
+            <button type="submit">Cadastrar funcionário</button>
+            <p class="form-message" id="employee-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section product-admin-section" aria-labelledby="product-admin-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Gerenciamento</p>
+            <h2 id="product-admin-title">Produtos cadastrados</h2>
+          </div>
+          <span class="item-count" id="product-admin-count" aria-live="polite"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="management-table">
+            <thead>
+              <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="product-admin-list"></tbody>
+          </table>
+          <p class="empty-state" id="product-admin-empty" hidden>Nenhum produto cadastrado.</p>
+        </div>
+        <p class="form-message section-message" id="product-delete-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="section employee-section" aria-labelledby="employees-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Pessoas cadastradas</p>
+            <h2 id="employees-title">Funcionários</h2>
+          </div>
+          <span class="item-count" id="employee-count" aria-live="polite"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="employee-list"></tbody>
+          </table>
+          <p class="empty-state" id="employee-empty">Nenhum funcionário cadastrado ainda.</p>
+        </div>
+        <p class="form-message section-message" id="employee-delete-message" role="status" aria-live="polite"></p>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const apiUrl = "Cadastro.php";
+    const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+    const availableIllustrations = new Set([
+      "notebook", "pen", "planner", "markers", "notepad", "case", "tape", "pencil", "cards", "artkit"
+    ]);
+    const apiMessage = document.getElementById("api-message");
+    let products = [];
+    let employees = [];
+
+    async function requestApi(method, payload = null, query = "") {
+      const options = { method, headers: {} };
+      if (payload !== null) {
+        options.headers["Content-Type"] = "application/json";
+        options.body = JSON.stringify(payload);
+      }
+
+      const response = await fetch(query ? `${apiUrl}?${query}` : apiUrl, options);
+      let result;
+      try {
+        result = await response.json();
+      } catch (error) {
+        throw new Error("A resposta do servidor está inválida. Verifique a configuração do PHP.");
+      }
+      if (!response.ok) {
+        throw new Error(result.error || "Não foi possível concluir a operação.");
+      }
+      return result;
+    }
+
+    function showApiMessage(message, isError = false) {
+      apiMessage.textContent = message;
+      apiMessage.hidden = message === "";
+      apiMessage.classList.toggle("is-error", isError);
+    }
+
+    function makeIllustration(name) {
+      const illustrationName = availableIllustrations.has(name) ? name : "package";
+      const illustration = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      illustration.classList.add("product-illustration");
+      illustration.setAttribute("viewBox", "0 0 64 64");
+      illustration.setAttribute("aria-hidden", "true");
+      const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+      use.setAttribute("href", `#illustration-${illustrationName}`);
+      illustration.append(use);
+      return illustration;
+    }
+
+    function renderProducts() {
+      const list = document.getElementById("product-list");
+      const managementList = document.getElementById("product-admin-list");
+      list.replaceChildren();
+      managementList.replaceChildren();
+
+      products.forEach((product) => {
+        const illustrationName = availableIllustrations.has(product.illustration) ? product.illustration : "package";
+        const card = document.createElement("article");
+        card.className = "product-card";
+        const visual = document.createElement("div");
+        visual.className = `product-visual visual-${illustrationName}`;
+        visual.append(makeIllustration(illustrationName));
+        const title = document.createElement("h3");
+        title.textContent = product.name;
+        const description = document.createElement("p");
+        description.textContent = product.description;
+        const price = document.createElement("strong");
+        price.className = "product-price";
+        price.textContent = currency.format(Number(product.price));
+        card.append(visual, title, description, price);
+        list.append(card);
+
+        const row = document.createElement("tr");
+        const productCell = document.createElement("td");
+        const productInfo = document.createElement("div");
+        productInfo.className = "management-product";
+        const thumbnail = document.createElement("div");
+        thumbnail.className = `product-thumb visual-${illustrationName}`;
+        thumbnail.append(makeIllustration(illustrationName));
+        const details = document.createElement("div");
+        const managementName = document.createElement("strong");
+        managementName.textContent = product.name;
+        const managementDescription = document.createElement("span");
+        managementDescription.textContent = product.description;
+        details.append(managementName, managementDescription);
+        productInfo.append(thumbnail, details);
+        productCell.append(productInfo);
+        const priceCell = document.createElement("td");
+        priceCell.textContent = currency.format(Number(product.price));
+        const actionCell = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.className = "remove-button";
+        removeButton.type = "button";
+        removeButton.textContent = "Remover";
+        removeButton.dataset.productId = String(product.id);
+        removeButton.setAttribute("aria-label", `Remover produto: ${product.name}`);
+        actionCell.append(removeButton);
+        row.append(productCell, priceCell, actionCell);
+        managementList.append(row);
+      });
+
+      const productCount = products.length;
+      document.getElementById("product-count").textContent =
+        `${productCount} ${productCount === 1 ? "produto" : "produtos"}`;
+      document.getElementById("product-admin-count").textContent =
+        `${productCount} ${productCount === 1 ? "produto" : "produtos"}`;
+      document.getElementById("product-empty").hidden = productCount > 0;
+      document.getElementById("product-admin-empty").hidden = productCount > 0;
+    }
+
+    function renderEmployees() {
+      const list = document.getElementById("employee-list");
+      list.replaceChildren();
+      employees.forEach((employee) => {
+        const row = document.createElement("tr");
+        [employee.name, employee.cpf, employee.email].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        });
+        const actionCell = document.createElement("td");
+        const removeButton = document.createElement("button");
+        removeButton.className = "remove-button";
+        removeButton.type = "button";
+        removeButton.textContent = "Remover";
+        removeButton.dataset.employeeId = String(employee.id);
+        removeButton.setAttribute("aria-label", `Remover funcionário: ${employee.name}`);
+        actionCell.append(removeButton);
+        row.append(actionCell);
+        list.append(row);
+      });
+      document.getElementById("employee-empty").hidden = employees.length > 0;
+      document.getElementById("employee-count").textContent =
+        `${employees.length} ${employees.length === 1 ? "funcionário" : "funcionários"}`;
+    }
+
+    async function refreshData() {
+      const data = await requestApi("GET");
+      if (!Array.isArray(data.products) || !Array.isArray(data.employees)) {
+        throw new Error("O servidor retornou dados em um formato inválido.");
+      }
+      products = data.products;
+      employees = data.employees;
+      renderProducts();
+      renderEmployees();
+      showApiMessage("");
+    }
+
+    document.getElementById("product-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = new FormData(form);
+      const message = document.getElementById("product-message");
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      try {
+        await requestApi("POST", {
+          type: "product",
+          name: data.get("name").trim(),
+          price: Number(data.get("price")),
+          description: data.get("description").trim()
+        });
+        form.reset();
+        message.textContent = "Produto salvo no banco de dados.";
+        await refreshData();
+      } catch (error) {
+        message.textContent = error.message;
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    document.getElementById("employee-cpf").addEventListener("input", (event) => {
+      const digits = event.currentTarget.value.replace(/\D/g, "").slice(0, 11);
+      event.currentTarget.value = digits
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d)/, "$1.$2")
+        .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    });
+
+    document.getElementById("employee-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = new FormData(form);
+      const message = document.getElementById("employee-message");
+      const submitButton = form.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      try {
+        await requestApi("POST", {
+          type: "employee",
+          name: data.get("name").trim(),
+          cpf: data.get("cpf"),
+          email: data.get("email").trim()
+        });
+        form.reset();
+        message.textContent = "Funcionário salvo no banco de dados.";
+        await refreshData();
+      } catch (error) {
+        message.textContent = error.message;
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    document.getElementById("product-admin-list").addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-product-id]");
+      if (!button) return;
+      const product = products.find((item) => String(item.id) === button.dataset.productId);
+      if (!product || !window.confirm(`Deseja remover o produto "${product.name}"?`)) return;
+
+      const message = document.getElementById("product-delete-message");
+      button.disabled = true;
+      try {
+        await requestApi("DELETE", null, `type=product&id=${encodeURIComponent(product.id)}`);
+        await refreshData();
+        message.textContent = "Produto removido do banco de dados.";
+      } catch (error) {
+        message.textContent = error.message;
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("employee-list").addEventListener("click", async (event) => {
+      const button = event.target.closest("button[data-employee-id]");
+      if (!button) return;
+      const employee = employees.find((item) => String(item.id) === button.dataset.employeeId);
+      if (!employee || !window.confirm(`Deseja remover o funcionário "${employee.name}"?`)) return;
+
+      const message = document.getElementById("employee-delete-message");
+      button.disabled = true;
+      try {
+        await requestApi("DELETE", null, `type=employee&id=${encodeURIComponent(employee.id)}`);
+        await refreshData();
+        message.textContent = "Funcionário removido do banco de dados.";
+      } catch (error) {
+        message.textContent = error.message;
+        button.disabled = false;
+      }
+    });
+
+    const tabs = [
+      { button: document.getElementById("catalog-tab"), panel: document.getElementById("catalog-panel") },
+      { button: document.getElementById("registrations-tab"), panel: document.getElementById("registrations-panel") }
+    ];
+
+    function activateTab(activeTab, moveFocus) {
+      tabs.forEach(({ button, panel }) => {
+        const isActive = button === activeTab;
+        button.setAttribute("aria-selected", String(isActive));
+        button.tabIndex = isActive ? 0 : -1;
+        panel.hidden = !isActive;
+      });
+      if (moveFocus) activeTab.focus();
+    }
+
+    tabs.forEach(({ button }) => {
+      button.addEventListener("click", () => activateTab(button, false));
+      button.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        const currentIndex = tabs.findIndex((tab) => tab.button === button);
+        const nextIndex = (currentIndex + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
+        activateTab(tabs[nextIndex].button, true);
+      });
+    });
+
+    document.getElementById("show-catalog").addEventListener("click", () => {
+      activateTab(document.getElementById("catalog-tab"), false);
+    });
+
+    refreshData().catch((error) => {
+      showApiMessage(
+        `${error.message} Inicie o servidor PHP com SQLite e abra a página pelo endereço local indicado no README.`,
+        true
+      );
+    });
+  </script>
+</body>
+</html>
